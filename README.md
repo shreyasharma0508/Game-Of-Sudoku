@@ -1,65 +1,48 @@
-# Game-Of-Sudoku
+# Game Of Sudoku
+This repository contains a simple Sudoku game implemented in Python. It includes both a terminal-based version and a GUI version. The game solves a Sudoku puzzle using a backtracking algorithm.
 
-# The is_valid(board, row, col, num) function
+## File Descriptions
+### sudoku_solver.py
+#### is_valid(board, row, col, num) function
+This function checks whether a number can be placed at a given position in the Sudoku grid.
 
-a)This function checks if a number can be placed at a given position. 
+The function checks the specific row, column, and 3x3 box for the presence of the number. If the number is not present, it returns True; otherwise, False.
 
-b)It does so by checking the row, column and 3x3 box for the presence of that number. 
+The 3x3 box check calculates the starting indices of the box and then iterates through it for a match. The formulae start_row = row - row%3 and start_col = col - col%3 are used to get the top-left cell of the 3x3 box containing the given cell.
 
-c)If the number is not present, it returns True else False (Iteration)
+The time complexity is O(n), as it checks for the number's presence in the respective row, column, and 3x3 box. Each check takes O(n) time.
 
-d)The box check calculates the start indices of the box and then iterates through it for a match. 
+#### solve_sudoku(board) function
+This function solves the Sudoku puzzle using the backtracking algorithm.
 
-e)The formulae start_row = row - row%3 and start_col = col - col%3 get the top-left cell of the 3x3 box in which the given cell falls.
+It iterates through each cell of the grid, and when it finds an empty cell (marked with 0), it tries to fit a number from 1 to 9.
 
-f)Big O: O(n) because it checks the number's presence in the respective row, column, and 3x3 box, each taking O(n) time (where n is the size of the Sudoku board, in this case n=9). Therefore, the time complexity is O(n + n + n) = O(n). 
+If a number fits, it recursively tries to fill the next empty cell. If no number can be placed in a certain cell, it backtracks to the previous cells and tries different numbers.
 
-# The solve_sudoku(board) function
-   
-a) This function solves the sudoku puzzle using backtracking.
+The base case for the recursion is when the grid is completely filled. At this point, the function returns True.
 
-b) It iterates through each cell of the board, and when it finds an empty cell (with 0), it tries to fit in a number from 1 to 9.
+The time complexity is O(n^4), due to the recursion and iterative processes. For each empty cell, it iterates over n possible numbers. For each number, it makes a recursive call to solve_sudoku(board). In the worst-case scenario, the function has to iterate through each cell in the grid (n^2 cells for an n x n grid) and for each cell, iterate through n possibilities.
 
-c) If the number fits, it recursively tries to fill the next empty cell. 
+#### Driver Code
+The driver code defines the Sudoku grid and calls the solve_sudoku(board) function.
 
-d) If a cell is found where no number fits, it backtracks, changing the previous cells, and tries to fit in another number.
+The 9x9 Sudoku grid is represented as a 2D list, with empty cells denoted by 0.
 
-e) The function iterates through the entire board using nested loops for rows and columns. 
+The solve_sudoku(board) function is called to solve the puzzle. If a solution is found, the solved grid is printed. Otherwise, it prints "No solution exists".
 
-f) If an empty cell (with 0) is found, it then iterates from 1 to 9 to try and find a number that can fit there.
+### sudoku_gui.py
+This file contains the code for the GUI version of the game.
 
-g) If a number is valid (i.e., is_valid(board, row, col, num) returns True), it places that number there and makes a recursive call to solve_sudoku(board).
+The draw_numbers() function draws the numbers on the Sudoku grid. It uses the blit() function to draw on the screen.
 
-h) If the recursive call returns True, it means the remaining board could be filled successfully, and the function returns True.
+The main game loop handles event checking (such as clicking the close button), clearing the screen, drawing the grid and the numbers, and updating the screen.
 
-i) If the function has tried all numbers from 1 to 9 and none could be placed in a certain cell, it resets that cell (backtracks) and returns False.
+If you uncomment the time.sleep(3); solve_sudoku(board) line, it will solve the Sudoku automatically after 3 seconds.
 
-j) The base case for the recursion is when the board is completely filled, which happens when the function has iterated over all cells and hasn't found any empty cells. In this case, the function returns True.
+## Usage
+To solve a Sudoku puzzle, define your puzzle in the driver code section as a 2D list (with 0s representing empty cells) and run the script. The solution will be printed in the console. For the GUI version, run the sudoku_gui.py file.
 
-k) Big O: O(n^4) because this function is a bit more complex because it involves recursion. For each empty cell, it tries every possible number, and for each number, it makes a recursive call. There are n^2 cells in the Sudoku board (n being 9 for a 9x9 Sudoku). In the worst-case scenario (an empty board), each cell could potentially go through n iterations. For each of these, the is_valid function is called which again takes O(n) time. Thereby, the time complexity is O((n^2)nn) = O(n^4). This obviously would be the worst-case time complexity, corresponding to a completely empty Sudoku board.
-
-# The Driver Code
-   
-a) This is where the sudoku board is defined and the solve_sudoku(board) function is called.
-
-b) The 9x9 sudoku board is represented as a 2D list. Empty cells are denoted by 0.
-
-c) The solve_sudoku(board) function is called to solve the puzzle. 
-
-d) If a solution is found, the solved board is printed. Otherwise, it prints "No solution exists".
-
-# The GUI file
-
-a) The draw_numbers() function draws the numbers on the board.
-
-b) It creates a new font object, then for each number on the board, it renders the text and draws it on the screen. 
-
-c) Note that the blit() function is used to draw on the screen, and the coordinates are slightly adjusted to center the text in the cells.
-
-d) The main part of the code is the game loop. 
-
-e) This is a common structure in games, where the code inside the loop is run every frame. 
-
-f) The loop first checks for events (such as clicking the close button), then clears the screen, draws the grid and the numbers, and updates the screen. 
-
-g) If you uncomment the time.sleep(3); solve_sudoku(board) line, it will solve the sudoku automatically after 3 seconds.
+## Requirements
+Python 3.x
+Pygame for the GUI version
+Note: This project is meant to be a demonstration of a backtracking algorithm to solve Sudoku puzzles, and as such, does not include functionality for inputting custom puzzles in the GUI version.
