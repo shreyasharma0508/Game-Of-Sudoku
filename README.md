@@ -1,6 +1,6 @@
 # Game-Of-Sudoku
 
-# is_valid(board, row, col, num) 
+# The is_valid(board, row, col, num) function
 
 a)This function checks if a number can be placed at a given position. 
 
@@ -14,7 +14,7 @@ e)The formulae start_row = row - row%3 and start_col = col - col%3 get the top-l
 
 f)Big O: O(n) because it checks the number's presence in the respective row, column, and 3x3 box, each taking O(n) time (where n is the size of the Sudoku board, in this case n=9). Therefore, the time complexity is O(n + n + n) = O(n). 
 
-# solve_sudoku(board) 
+# The solve_sudoku(board) function
    
 a) This function solves the sudoku puzzle using backtracking.
 
@@ -38,7 +38,7 @@ j) The base case for the recursion is when the board is completely filled, which
 
 k) Big O: O(n^4) because this function is a bit more complex because it involves recursion. For each empty cell, it tries every possible number, and for each number, it makes a recursive call. There are n^2 cells in the Sudoku board (n being 9 for a 9x9 Sudoku). In the worst-case scenario (an empty board), each cell could potentially go through n iterations. For each of these, the is_valid function is called which again takes O(n) time. Thereby, the time complexity is O((n^2)nn) = O(n^4). This obviously would be the worst-case time complexity, corresponding to a completely empty Sudoku board.
 
-# the driver code
+# The Driver Code
    
 a) This is where the sudoku board is defined and the solve_sudoku(board) function is called.
 
@@ -48,7 +48,7 @@ c) The solve_sudoku(board) function is called to solve the puzzle.
 
 d) If a solution is found, the solved board is printed. Otherwise, it prints "No solution exists".
 
-#The GUI file
+# The GUI file
 
 a) The draw_numbers() function draws the numbers on the board.
 
