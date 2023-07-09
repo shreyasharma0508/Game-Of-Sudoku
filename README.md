@@ -2,12 +2,12 @@
 
 1. The is_valid(board, row, col, num) function
 
--This function checks if a number can be placed at a given position. 
--It does so by checking the row, column and 3x3 box for the presence of that number. 
--If the number is not present, it returns True else False (Iteration)
--The box check calculates the start indices of the box and then iterates through it for a match. 
--The formulae start_row = row - row%3 and start_col = col - col%3 get the top-left cell of the 3x3 box in which the given cell falls.
--Big O: O(n) because it checks the number's presence in the respective row, column, and 3x3 box, each taking O(n) time (where n is the size of the Sudoku board, in this case n=9). Therefore, the time complexity is O(n + n + n) = O(n). 
+a)This function checks if a number can be placed at a given position. 
+b)It does so by checking the row, column and 3x3 box for the presence of that number. 
+c)If the number is not present, it returns True else False (Iteration)
+d)The box check calculates the start indices of the box and then iterates through it for a match. 
+e)The formulae start_row = row - row%3 and start_col = col - col%3 get the top-left cell of the 3x3 box in which the given cell falls.
+f)Big O: O(n) because it checks the number's presence in the respective row, column, and 3x3 box, each taking O(n) time (where n is the size of the Sudoku board, in this case n=9). Therefore, the time complexity is O(n + n + n) = O(n). 
 
 2. The solve_sudoku(board) function
    
